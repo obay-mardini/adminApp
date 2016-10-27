@@ -14,6 +14,7 @@
         vm.queryUsers = queryUsers;
         vm.querPurchases = querPurchases;
         vm.queryJournies = queryJournies;
+        setInterval(queryUsers, 1000);
         function queryUsers() {
             $http.get('/queryUsers').success(function(result) {
                 vm.users = result;
