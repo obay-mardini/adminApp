@@ -45,5 +45,83 @@ app.use(cookieSession({
   keys: ['key1', 'key2']
 }));
 
+var isAdmin = function(req,res,next){
+        console.log('next')
+        next();
+    }
+app.get('/queryUsers', function(req, res, next) {
+    var client = new pg.Client(dbUrl);
+    client.connect(function(err){
+        console.log('hello')
+        if(err){
+            console.log(err)
+        }
+        
+        var query = "SELECT * from users";
+        
+        client.query(query, [], function(error,result) {
+                console.log('ehlo')
+                if(error){
+                    console.log(error);
+                } else {
+                    console.log(result);
+                    res.json(result.rows);
+                }
+
+            });
+    })
+
+});
+
+app.get('/queryPurchases', function(req, res, next) {
+    var client = new pg.Client(dbUrl);
+    client.connect(function(err){
+        console.log('hello')
+        if(err){
+            console.log(err)
+        }
+        
+        var query = "SELECT * from purchases";
+        
+        client.query(query, [], function(error,result) {
+                console.log('ehlo')
+                if(error){
+                    console.log(error);
+                } else {
+                    console.log(result);
+                    res.json(result.rows);
+                }
+
+            });
+    })
+
+});
+
+app.get('/queryJournies', function(req, res, next) {
+    var client = new pg.Client(dbUrl);
+    client.connect(function(err){
+        console.log('hello')
+        if(err){
+            console.log(err)
+        }
+        
+        var query = "SELECT * from tickets";
+        
+        client.query(query, [], function(error,result) {
+                console.log('ehlo')
+                if(error){
+                    console.log(error);
+                } else {
+                    console.log(result);
+                    res.json(result.rows);
+                }
+
+            });
+    })
+
+});
+
+
+
 
 app.listen(process.env.PORT || 5555);

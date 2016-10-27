@@ -1,0 +1,74 @@
+<button ng-click="vm.queryUsers()">Users</button>
+<button ng-click="vm.querPurchases()">Purchases</button>
+<button ng-click="vm.queryJournies()">Journies</button>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tr ng-repeat="user in vm.users">
+        <td><strong>{{user.id}}</strong></td>
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td></td>
+    </tr>
+</table>
+
+<h1>purchases</h1>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Purchase Id</th>
+            <th>Ticket Id</th>
+            <th>Price</th>
+            <th>Carier</th>
+            <th>Agent</th>
+        </tr>
+    </thead>
+    <tr ng-repeat="purchase in vm.purchases">
+        <td><strong>{{purchase.purchaseid}}</strong></td>
+        <td>{{purchase.ticketid}}</td>
+        <td>{{purchase.price}}</td>
+        <td>{{purchase.carrier}}</td>
+        <td>{{purchase.agent}}</td>
+    </tr>
+</table>
+
+<h1>trips</h1>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>User Id</th>
+            <th>Ticket Id</th>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Location</th>
+            <th>Depart</th>
+            <th>Return</th>
+            <th>Adult</th>
+            <th>Children</th>
+            <th>Infants</th>
+            <th>Class</th>
+        </tr>
+    </thead>
+    <tr ng-repeat="ticket in vm.tickets">
+        <td><strong>{{ticket.userid}}</strong></td>
+        <td>{{ticket.ticketid}}</td>
+        <td>{{ticket.origin}}</td>
+        <td><strong>{{ticket.destination}}</strong></td>
+        <td>{{ticket.depart}}</td>
+        <td>{{ticket.return}}</td>
+        <td>{{ticket.adult}}</td>
+        <td><strong>{{ticket.children}}</strong></td>
+        <td>{{ticket.infants}}</td>
+        <td>{{ticket.class}}</td>
+    </tr>
+</table>
+
