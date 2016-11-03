@@ -1,7 +1,7 @@
 <button ng-click="vm.queryUsers()">Users</button>
 <button ng-click="vm.querPurchases()">Purchases</button>
 <button ng-click="vm.queryJournies()">Journies</button>
-
+<button ng-click="vm.draw()">Map</button>
 <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active">
         <a  role="tab" data-toggle="tab">Users</a>
@@ -13,6 +13,8 @@
         <a ng-click="vm.select()" role="tab" data-toggle="tab">journies</a>
     </li>
 </ul>
+
+<div id="container"></div>
 
 <div class="tab-content">
     <div role="tabpanel" class="tab-pane fade in active" id="usersTable"><h1>first</h1></div>

@@ -5,8 +5,8 @@
         .module('app.landing')
         .controller('LandingController', LandingController);
     
-    LandingController.$inject = ['$http', '$anchorScroll', '$location']
-    function LandingController($http, $anchorScroll, $location) {
+    LandingController.$inject = ['$http', '$anchorScroll', '$location', 'infoMap']
+    function LandingController($http, $anchorScroll, $location, infoMap) {
         var vm = this;
         vm.users = [];
         vm.purchases = [];
@@ -14,7 +14,7 @@
         vm.queryUsers = queryUsers;
         vm.querPurchases = querPurchases;
         vm.queryJournies = queryJournies;
-        
+        vm.draw = infoMap.draw;
         function queryUsers() {
             $http.get('/queryUsers').success(function(result) {
                 vm.users = result;

@@ -8,7 +8,8 @@
 
       // Custom modules.
 
-      'app.landing'
+      'app.landing',
+      'app.infoMap'
      
     ])
 })();
