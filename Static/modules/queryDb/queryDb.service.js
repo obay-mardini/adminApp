@@ -18,7 +18,7 @@
         
         function queryUsers(url) {
             var q = $q.defer()
-            $http.get('/queryUsers').success(function(result) {
+            $http.get(url).success(function(result) {
                 q.resolve(result);
             }).error(function(err){
                 q.reject(err);
