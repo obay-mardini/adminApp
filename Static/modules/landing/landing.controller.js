@@ -5,8 +5,9 @@
         .module('app.landing')
         .controller('LandingController', LandingController);
     
-    LandingController.$inject = ['$http', '$anchorScroll', '$location', 'infoMap']
-    function LandingController($http, $anchorScroll, $location, infoMap) {
+    LandingController.$inject = [ 'infoMap', 'queryDb']
+    
+    function LandingController(infoMap, queryDb) {
         var vm = this;
         vm.users = [];
         vm.purchases = [];
@@ -14,32 +15,47 @@
         vm.queryUsers = queryUsers;
         vm.querPurchases = querPurchases;
         vm.queryJournies = queryJournies;
-        vm.draw = infoMap.draw;
-        function queryUsers() {
-            $http.get('/queryUsers').success(function(result) {
+        vm.draw = settingTheMap;
+        vm.usersByCountry = {};
+        
+        function settingTheMap() {
+            var numberOfUsers = 0;
+            queryDb.queryUsers('/queryUsers').then(function(result) {
+                vm.usersByCountry = {};
+                result.forEach(function(user) {
+                    vm.usersByCountry[user.country] = vm.usersByCountry[user.country] || 0;
+                    vm.usersByCountry[user.country]++;
+                    numberOfUsers++;
+                });
+                infoMap.draw(vm.usersByCountry, numberOfUsers)
+            }).catch(function(err) {
+                console.log(err)
+            })
+        }
+        
+        function queryUsers() {    
+            queryDb.queryUsers('/queryUsers').then(function(result) {
                 vm.users = result;
-            }).error(function(err){
+            }).catch(function(err) {
                 console.log(err)
             })
         }
         
         function querPurchases() {
-            $http.get('/queryPurchases').success(function(result) {
+            queryDb.queryUsers('/queryPurchases').then(function(result) {
                 vm.purchases = result;
-            }).error(function(err){
+            }).catch(function(err){
                 console.log(err)
             })
         }
         
         function queryJournies() {
-            $http.get('/queryJournies').success(function(result) {
+            queryDb.queryUsers('/queryJournies').then(function(result) {
                 vm.tickets = result;
-            }).error(function(err){
+            }).catch(function(err){
                 console.log(err)
             })
         }
-        
-    
         
     }
 })();

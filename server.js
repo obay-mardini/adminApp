@@ -60,11 +60,9 @@ app.get('/queryUsers', function(req, res, next) {
         var query = "SELECT * from users";
         
         client.query(query, [], function(error,result) {
-                console.log('ehlo')
                 if(error){
                     console.log(error);
                 } else {
-                    console.log(result);
                     res.json(result.rows);
                 }
 

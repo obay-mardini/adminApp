@@ -8,24 +8,25 @@
 
     function infoMap() {
         var service = {
-            draw: x
+            draw: drawMap
         };
         
         return service;
         
         /////////
         
-        function x() {
+        function drawMap(users, numberOfUsers) {
             d3.select(window).on("resize", throttle);
-        var users = {
-            "Syrian Arab Republic": 80,
-            "Germany": 2,
-            "United States": 18
-        };
+            
+//            var users = {
+//            "Syrian Arab Republic": 80,
+//            "Germany": 2,
+//            "United States": 18
+//            };
         var mainTraffic = [];
         var mediumTraffic = [];
         var poorTraffic = [];
-        var numberOfUsers = 100;
+   
         for (var key in users) {
             if(users[key]/numberOfUsers > 0.2) {
                 mainTraffic.push(key)
@@ -64,7 +65,7 @@
               .call(zoom)
               .on("click", click)
               .append("g");
-            console.log(svg)
+            
           g = svg.append("g");
 
         }
@@ -90,7 +91,6 @@
 
           var country = g.selectAll(".country").data(topo);
           // loop through the ountries update the path elements
-            console.log(country)
           country.enter().insert("path")
               .attr("class", "country")
               .attr("d", path)

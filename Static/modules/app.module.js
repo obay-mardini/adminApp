@@ -7,9 +7,9 @@
       'ngRoute',
 
       // Custom modules.
-
       'app.landing',
-      'app.infoMap'
+      'app.infoMap',
+      'app.queryDb'
      
     ])
 })();
