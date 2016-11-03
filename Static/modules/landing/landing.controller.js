@@ -5,8 +5,8 @@
         .module('app.landing')
         .controller('LandingController', LandingController);
     
-    LandingController.$inject = ['$http']
-    function LandingController($http) {
+    LandingController.$inject = ['$http', '$anchorScroll', '$location']
+    function LandingController($http, $anchorScroll, $location) {
         var vm = this;
         vm.users = [];
         vm.purchases = [];
@@ -38,6 +38,8 @@
                 console.log(err)
             })
         }
+        
+    
         
     }
 })();
