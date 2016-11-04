@@ -15,12 +15,9 @@
 
         /////////
 
-        function drawMap(users, numberOfUsers, callback) {
+        function drawMap(callback) {
             d3.select('svg').remove();
             d3.select(window).on("resize", throttle);
-            var mainTraffic = [];
-            var mediumTraffic = [];
-            var poorTraffic = [];
 
             var zoom = d3.behavior.zoom()
                 .scaleExtent([1, 9])
@@ -38,6 +35,8 @@
             setup(width, height);
 
             function setup(width, height) {
+                console.log(width);
+                console.log(height)
                 projection = d3.geo.mercator()
                     .translate([(width / 2), (height / 2)])
                     .scale(width / 2 / Math.PI);
@@ -56,35 +55,12 @@
             }
 
             d3.json("world-topo-min.json", function(error, world) {
+                console.log(error)
                 var countries = topojson.feature(world, world.objects.countries).features;
                 topo = countries;
                 draw(topo);
             });
-            
-            function usersBased(d, i) {
-                for (var key in users) {
-                    if (users[key] / numberOfUsers > 0.2) {
-                        mainTraffic.push(key)
-                    } else if (users[key] / numberOfUsers > 0.1) {
-                        mediumTraffic.push(key)
-                    } else {
-                        poorTraffic.push(key)
-                    }
-                }
                 
-                if (mainTraffic.indexOf(d.properties.name) > -1) {
-                    return "blue";
-                } else if (mediumTraffic.indexOf(d.properties.name) > -1) {
-                    return 'red'
-                } else if (poorTraffic.indexOf(d.properties.name) > -1) {
-                    return 'green';
-                }
-
-                return 'black';
-            }
-            
-            
-            
             function draw(topo) {
                 //draw graticule
                 svg.append("path")
@@ -153,7 +129,6 @@
 
             }
 
-
             function redraw() {
                 width = document.getElementById('container').offsetWidth;
                 height = width / 2;
@@ -161,7 +136,6 @@
                 setup(width, height);
                 draw(topo);
             }
-
 
             function move() {
 

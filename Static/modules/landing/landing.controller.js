@@ -6,7 +6,7 @@
         .controller('LandingController', LandingController);
     
     LandingController.$inject = [ 'infoMap', 'queryDb']
-    
+
     function LandingController(infoMap, queryDb) {
         var vm = this;
         vm.users = [];
@@ -17,31 +17,46 @@
         vm.queryJournies = queryJournies;
         vm.draw = settingTheMap;
         vm.usersByCountry = {};
-        
-//        function settingTheMap() {
-//            var numberOfUsers = 0;
-//            queryDb.queryUsers('/queryUsers').then(function(result) {
-//                vm.usersByCountry = {};
-//                result.forEach(function(user) {
-//                    vm.usersByCountry[user.country] = vm.usersByCountry[user.country] || 0;
-//                    vm.usersByCountry[user.country]++;
-//                    numberOfUsers++;
-//                });
-//                infoMap.draw(vm.usersByCountry, numberOfUsers, usersBased)
-//            }).catch(function(err) {
-//                console.log(err)
-//            })
-//        }
-        
+        vm.map = 'users'
+        vm.ticketsRequest = false;
+        vm.mapContainer = false;
+        vm.purchaseRequest = false;
+        vm.usersRequest = false;
         function settingTheMap() {
             var numberOfUsers = 0;
             queryDb.queryUsers('/queryJournies').then(function(result) {
-//                vm.usersByCountry = {};
-//                result.forEach(function(user) {
-//                    vm.usersByCountry[user.country] = vm.usersByCountry[user.country] || 0;
-//                    vm.usersByCountry[user.country]++;
-//                    numberOfUsers++;
-//                });
+                falsefy();
+                vm.mapContainer = true;
+                function usersBased(d, i) {
+                    var mainTraffic = [];
+                    var mediumTraffic = [];
+                    var poorTraffic = [];
+                    
+                    vm.usersByCountry = {};
+                    result.forEach(function(user) {
+                        vm.usersByCountry[user.country] = vm.usersByCountry[user.country] || 0;
+                        vm.usersByCountry[user.country]++;
+                    });
+                    for (var key in vm.usersByCountry) {
+                        if (vm.usersByCountry[key] / result.length > 0.2) {
+                            mainTraffic.push(key)
+                        } else if (vm.usersByCountry[key] / result.length > 0.1) {
+                            mediumTraffic.push(key)
+                        } else {
+                            poorTraffic.push(key)
+                        }
+                    }
+
+                    if (mainTraffic.indexOf(d.properties.name) > -1) {
+                        return "blue";
+                    } else if (mediumTraffic.indexOf(d.properties.name) > -1) {
+                        return 'red'
+                    } else if (poorTraffic.indexOf(d.properties.name) > -1) {
+                        return 'green';
+                    }
+
+                    return 'black';
+                }
                 
                 function destinationBased(d, i) {
                     var destionations = result.reduce(function(target, current){
@@ -59,8 +74,12 @@
 
                     return 'black';
                 }
+                if(vm.map !== 'users') {
+                    infoMap.draw(destinationBased);
+                } else {
+                    infoMap.draw(usersBased)
+                }
                 
-                infoMap.draw(vm.usersByCountry, null, destinationBased)
             }).catch(function(err) {
                 console.log(err)
             })
@@ -68,6 +87,8 @@
         
         function queryUsers() {    
             queryDb.queryUsers('/queryUsers').then(function(result) {
+                falsefy();
+                vm.usersRequest = true;
                 vm.users = result;
             }).catch(function(err) {
                 console.log(err)
@@ -76,6 +97,8 @@
         
         function querPurchases() {
             queryDb.queryUsers('/queryPurchases').then(function(result) {
+                falsefy();
+                vm.purchaseRequest = true;
                 vm.purchases = result;
             }).catch(function(err){
                 console.log(err)
@@ -84,10 +107,19 @@
         
         function queryJournies() {
             queryDb.queryUsers('/queryJournies').then(function(result) {
+                falsefy();
+                vm.ticketsRequest = true;
                 vm.tickets = result;
             }).catch(function(err){
                 console.log(err)
             })
+        }
+        
+        function falsefy() {
+            vm.ticketsRequest = false;
+            vm.mapContainer = false;
+            vm.purchaseRequest = false;
+            vm.usersRequest = false;
         }
         
     }
