@@ -19,6 +19,7 @@ var config = {
   max: 10, 
   idleTimeoutMillis: 30000
 };
+console.log(config)
 var pool = new pg.Pool(config);
 
 app.use(express.static(__dirname + '/Static'));
