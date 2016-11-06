@@ -1,6 +1,6 @@
 body {
     margin: 0px;
-    background-image: url('../content/resource_12375.png')
+    background-image: url('../../content/resource_12375.png')
 }
 .country:hover{
   stroke: #fff;
@@ -80,7 +80,7 @@ ul div {
     display: inline-block;
 }
 #navbar {
-    background: #8BC34A;
+    background: black;
     text-align: center;
 }
 
