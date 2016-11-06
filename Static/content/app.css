@@ -13,9 +13,16 @@
   font-size:10px;
   text-transform:capitalize;
 }
+
 #container {
+    border:2px solid #000;
+}
+
+table {
+    border:2px solid #000;
+}
+#mainPage {
   margin:10px 10%;
-  border:2px solid #000;
   border-radius: 5px;
   height:100%;
   overflow:hidden;
@@ -52,22 +59,26 @@ div.tooltip {
     margin-bottom: auto;
 }
 
-#mainContainer {
-    border: 2px black solid;
-    background: #F0F8FF;
-}
-
-#container {
-    width: 100%;
-    margin: 10%;
-    border: 2px solid #000;
-    border-radius: 5px;
-    height: 100%;
-    overflow: hidden;
+#navbar {
+    background: black;
 }
 
 .hidden { 
   display: none; 
+}
+
+#controllPanel {
+    width: 100%;
+}
+
+#usersButton {
+    width: 50%;
+    border-radius: 0 0 0 60px;
+}
+
+#destinationsButton {
+    width: 50%;
+    border-radius: 0 0 60px 0;
 }
 div.tooltip {
   color: #222; 

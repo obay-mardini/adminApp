@@ -75,9 +75,14 @@
                     return 'black';
                 }
                 if(vm.map !== 'users') {
-                    infoMap.draw(destinationBased);
+                    //to be replaced by a worker
+                    setTimeout(function() {
+                        infoMap.draw(destinationBased);
+                    }, 10);
                 } else {
-                    infoMap.draw(usersBased)
+                    setTimeout(function() {
+                        infoMap.draw(usersBased);
+                    }, 10);
                 }
                 
             }).catch(function(err) {
@@ -85,8 +90,10 @@
             })
         }
         
-        function queryUsers() {    
+        function queryUsers() {   
+           
             queryDb.queryUsers('/queryUsers').then(function(result) {
+                 console.log('hello')
                 falsefy();
                 vm.usersRequest = true;
                 vm.users = result;

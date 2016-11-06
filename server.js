@@ -15,6 +15,8 @@ var client = redis.createClient({
     port: 6379
 });
 
+var n =1;
+
 client.on('error', function(err) {
     console.log(err);
 });
@@ -50,9 +52,10 @@ var isAdmin = function(req,res,next){
         next();
     }
 app.get('/queryUsers', function(req, res, next) {
+    n += 1;
+    console.log(n)
     var client = new pg.Client(dbUrl);
     client.connect(function(err){
-        console.log('hello')
         if(err){
             console.log(err)
         }

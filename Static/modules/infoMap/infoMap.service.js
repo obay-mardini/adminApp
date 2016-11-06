@@ -23,8 +23,8 @@
                 .scaleExtent([1, 9])
                 .on("zoom", move);
 
-
-            var width = document.getElementById('container').offsetWidth;
+            
+            var width = document.getElementById('container').offsetWidth || document.getElementById('mainPage').offsetWidth ;
             var height = width / 2;
 
             var topo, projection, path, svg, g;
@@ -42,8 +42,8 @@
                     .scale(width / 2 / Math.PI);
 
                 path = d3.geo.path().projection(projection);
-
-                svg = d3.select("#container").append("svg")
+                
+                svg = d3.select("#container").insert("svg", ":first-child")
                     .attr("width", width)
                     .attr("height", height)
                     .call(zoom)
