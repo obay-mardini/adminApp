@@ -3,19 +3,30 @@
     <button ng-click="vm.querPurchases()">Purchases</button>
     <button ng-click="vm.queryJournies()">Journies</button>
     <button ng-click="vm.draw()">Map</button>
-    <label>{{vm.map}}
-        <input type="checkbox" ng-model="vm.map"
-               ng-true-value="'users'" ng-false-value="'destinations'">
-    </label>
 </div>
 <div id="mainPage">
         <div id="container" ng-show="vm.mapContainer">
             <div id="controllPanel">
-                <button id="usersButton">somethin</button>
-                <button id="destinationsButton">somethin</button>
+                <button id="usersButton" ng-click="vm.draw('users')">By Users</button>
+                <button id="destinationsButton" ng-click="vm.draw('destinations')">By Destinations</button>
             </div>
         </div>
-
+        <ul ng-show="vm.mapContainer" id="legend">
+            <ul ng-hide="vm.map">
+                <li><div style="background: blue;"></div>Highest Traffic</li>
+                <li><div style="background: red;"></div>Medium Traffic</li>
+                <li><div style="background: green;"></div>Poor Traffic</li>
+                <li><div style="background: black;"></div>No Traffic</li>
+            </ul>
+            <ul ng-show="vm.map">
+                <li><div style="background: blue;"></div>Highest Popularity</li>
+                <li><div style="background: red;"></div>Medium Popularity</li>
+                <li><div style="background: green;"></div>Poor Popularity</li>
+                <li><div style="background: black;"></div>None</li>
+            </ul>
+           
+        </ul>
+        
     
     <table ng-show="vm.ticketsRequest" class="table table-striped table-bordered">
         <thead>

@@ -1,3 +1,7 @@
+body {
+    margin: 0px;
+    background-image: url('../content/resource_12375.png')
+}
 .country:hover{
   stroke: #fff;
   stroke-width: 1.5px;
@@ -15,18 +19,19 @@
 }
 
 #container {
+/*    width: 50vw;*/
     border:2px solid #000;
+    background: #F0F8FF;
+    border-radius: 5px 5px 20px 20px;
 }
 
-table {
-    border:2px solid #000;
-}
 #mainPage {
-  margin:10px 10%;
+/*  width: 50vw;*/
+  max-width: 700px;
+  margin:10px auto;
   border-radius: 5px;
   height:100%;
   overflow:hidden;
-  background: #F0F8FF;
 }
 .hidden { 
   display: none; 
@@ -59,8 +64,24 @@ div.tooltip {
     margin-bottom: auto;
 }
 
+#legend {
+    border: 2px solid black;
+}
+ul {
+    list-style-type: none;
+    text-align: center;
+    background: #F0F8FF;
+}
+
+ul div {
+    width: 15px;
+    height: 15px;
+    margin-right: 15px;
+    display: inline-block;
+}
 #navbar {
-    background: black;
+    background: #8BC34A;
+    text-align: center;
 }
 
 .hidden { 
@@ -69,6 +90,7 @@ div.tooltip {
 
 #controllPanel {
     width: 100%;
+    display: inline-flex;
 }
 
 #usersButton {
@@ -99,4 +121,25 @@ div.tooltip {
 .equator {
   stroke: #ccc;
   stroke-width: 1px;
+}
+
+/*table*/
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+tr:nth-child(odd) {
+    background-color: #F0F8FF;
 }

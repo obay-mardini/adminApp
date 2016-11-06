@@ -17,41 +17,43 @@
         vm.queryJournies = queryJournies;
         vm.draw = settingTheMap;
         vm.usersByCountry = {};
-        vm.map = 'users'
+        vm.map = true;
         vm.ticketsRequest = false;
         vm.mapContainer = false;
         vm.purchaseRequest = false;
         vm.usersRequest = false;
-        function settingTheMap() {
+        vm.mainTraffic = []
+        function settingTheMap(mapType) {
             var numberOfUsers = 0;
             queryDb.queryUsers('/queryJournies').then(function(result) {
                 falsefy();
                 vm.mapContainer = true;
                 function usersBased(d, i) {
-                    var mainTraffic = [];
-                    var mediumTraffic = [];
-                    var poorTraffic = [];
+                    vm.mainTraffic = [];
+                    vm.mediumTraffic = [];
+                    vm.poorTraffic = [];
                     
                     vm.usersByCountry = {};
                     result.forEach(function(user) {
                         vm.usersByCountry[user.country] = vm.usersByCountry[user.country] || 0;
                         vm.usersByCountry[user.country]++;
                     });
+                    
                     for (var key in vm.usersByCountry) {
                         if (vm.usersByCountry[key] / result.length > 0.2) {
-                            mainTraffic.push(key)
+                            vm.mainTraffic.push(key)
                         } else if (vm.usersByCountry[key] / result.length > 0.1) {
-                            mediumTraffic.push(key)
+                            vm.mediumTraffic.push(key)
                         } else {
-                            poorTraffic.push(key)
+                            vm.poorTraffic.push(key)
                         }
                     }
-
-                    if (mainTraffic.indexOf(d.properties.name) > -1) {
+            
+                    if (vm.mainTraffic.indexOf(d.properties.name) > -1) {
                         return "blue";
-                    } else if (mediumTraffic.indexOf(d.properties.name) > -1) {
+                    } else if (vm.mediumTraffic.indexOf(d.properties.name) > -1) {
                         return 'red'
-                    } else if (poorTraffic.indexOf(d.properties.name) > -1) {
+                    } else if (vm.poorTraffic.indexOf(d.properties.name) > -1) {
                         return 'green';
                     }
 
@@ -64,22 +66,24 @@
                     target[current.destinationcountry]++;
                     return target;
                     }, {})
-                    if (destionations[d.properties.name] / result.length > 0.2) {
+                    if (destionations[d.properties.name] / result.length > 0.3) {
                         return "blue";
+                    } else if (destionations[d.properties.name] / result.length > 0.2) {
+                        return 'red';
                     } else if (destionations[d.properties.name] / result.length > 0.1) {
-                        return 'red'
+                        return 'green'
                     } else {;
-                        return 'green';
+                         return 'black';
                     }
-
-                    return 'black';
                 }
-                if(vm.map !== 'users') {
+                if(mapType !== 'users') {
                     //to be replaced by a worker
+                    vm.map = true;
                     setTimeout(function() {
                         infoMap.draw(destinationBased);
                     }, 10);
                 } else {
+                    vm.map = false;
                     setTimeout(function() {
                         infoMap.draw(usersBased);
                     }, 10);
