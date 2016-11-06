@@ -5,7 +5,7 @@ var cookieSession = require('cookie-session');
 var bodyParser = require('body-parser');
 var pg = require('pg');
 var querystring = require('querystring');
-URL = require("url-parse");
+var URL = require("url-parse");
 var dbUrl = process.env.DATABASE_URL || "postgres://spiced:spiced1@localhost:5432/bookMe";
 var n =1;
 
@@ -14,7 +14,7 @@ var config = {
   user: herokuDb.username || 'spiced', 
   database: herokuDb.path || 'bookMe', 
   password: herokuDb.password || 'spiced1', 
-  host: 'localhost', 
+  host: herokuDb.hostname || 'localhost', 
   port: 5432,
   max: 10, 
   idleTimeoutMillis: 30000
