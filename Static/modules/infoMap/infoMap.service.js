@@ -35,8 +35,6 @@
             setup(width, height);
 
             function setup(width, height) {
-                console.log(width);
-                console.log(height)
                 projection = d3.geo.mercator()
                     .translate([(width / 2), (height / 2)])
                     .scale(width / 2 / Math.PI);

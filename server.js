@@ -8,8 +8,6 @@ var querystring = require('querystring');
 URL = require("url-parse");
 var dbUrl = process.env.DATABASE_URL || "postgres://spiced:spiced1@localhost:5432/bookMe";
 var n =1;
-var x = new URL("postgres://spiced:spiced1@localhost:5432/bookMe")
-console.log(x)
 
 var herokuDb = new URL(process.env.DATABASE_URL) || null;
 var config = {
@@ -49,72 +47,60 @@ app.get('/queryUsers', function(req, res, next) {
         if(err) {
             return console.error('error fetching client from pool', err);
         }
-        var client = new pg.Client(dbUrl);
-//        client.connect(function(err){
-//            if(err){
-//                console.log(err)
-//            }
 
-            var query = "SELECT * from users";
+        var query = "SELECT * from users";
 
-            client.query(query, [], function(error,result) {
-                    if(error){
-                        console.log(error);
-                    } else {
-                        res.json(result.rows);
-                        done();
-                    }
+        client.query(query, [], function(error,result) {
+                if(error){
+                    console.log(error);
+                } else {
+                    res.json(result.rows);
+                    done();
+                }
 
-            });
-//        })
+        });
     });
 
 });
 
 app.get('/queryPurchases', function(req, res, next) {
-    var client = new pg.Client(dbUrl);
-    client.connect(function(err){
-        console.log('hello')
-        if(err){
-            console.log(err)
+    
+    pool.connect(function(err, client, done) {
+        if(err) {
+            return console.error('error fetching client from pool', err);
         }
-        
+
         var query = "SELECT * from purchases";
-        
+
         client.query(query, [], function(error,result) {
-                console.log('ehlo')
-                if(error){
-                    console.log(error);
-                } else {
-                    console.log(result);
-                    res.json(result.rows);
-                }
+            if(error){
+                console.log(error);
+            } else {
+                res.json(result.rows);
+                done();
+            }
 
-            });
+        });
     })
-
 });
 
 app.get('/queryJournies', function(req, res, next) {
-    var client = new pg.Client(dbUrl);
-    client.connect(function(err){
-        console.log('hello')
-        if(err){
-            console.log(err)
+    pool.connect(function(err, client, done) {
+        if(err) {
+            return console.error('error fetching client from pool', err);
         }
-        
-        var query = "SELECT * from tickets";
-        
-        client.query(query, [], function(error,result) {
-                console.log('ehlo')
-                if(error){
-                    console.log(error);
-                } else {
-                    console.log(result);
-                    res.json(result.rows);
-                }
 
-            });
+        var query = "SELECT * from tickets";
+
+        client.query(query, [], function(error,result) {
+            if(error){
+                console.log(error);
+            } else {
+                res.json(result.rows);
+                done();
+            }
+
+        });
     })
 
 });
