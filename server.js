@@ -8,7 +8,6 @@ var querystring = require('querystring');
 var URL = require("url-parse");
 var dbUrl = process.env.DATABASE_URL || "postgres://spiced:spiced1@localhost:5432/bookMe";
 var n =1;
-
 var herokuDb = new URL(process.env.DATABASE_URL) || null;
 var config = {
   user: herokuDb.username || 'spiced', 
@@ -19,7 +18,6 @@ var config = {
   max: 10, 
   idleTimeoutMillis: 30000
 };
-console.log(config)
 var pool = new pg.Pool(config);
 
 app.use(express.static(__dirname + '/Static'));
@@ -105,8 +103,5 @@ app.get('/queryJournies', function(req, res, next) {
     })
 
 });
-
-
-
 
 app.listen(process.env.PORT || 5555);
