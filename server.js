@@ -12,7 +12,7 @@ var n =1;
 var herokuDb = new URL(process.env.DATABASE_URL) || null;
 var config = {
   user: herokuDb.username || 'spiced', 
-  database: herokuDb.path || 'bookMe', 
+  database: herokuDb.pathname || 'bookMe', 
   password: herokuDb.password || 'spiced1', 
   host: herokuDb.hostname || 'localhost', 
   port: 5432,
