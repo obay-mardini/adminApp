@@ -27,7 +27,7 @@ body {
 
 #mainPage {
 /*  width: 50vw;*/
-  max-width: 700px;
+  max-width: 750px;
   margin:10px auto;
   border-radius: 5px;
   height:100%;
@@ -82,8 +82,16 @@ ul div {
 #navbar {
     background: black;
     text-align: center;
+    height: 50px;
 }
 
+#navbar a {
+    color: darkgreen;
+    display: inline-block;
+    margin: 10px 15px;
+    text-decoration: underline;
+    cursor: pointer
+}
 .hidden { 
   display: none; 
 }

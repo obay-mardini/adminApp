@@ -53,7 +53,6 @@
             }
 
             d3.json("scripts/world-topo-min.json", function(error, world) {
-                console.log(error)
                 var countries = topojson.feature(world, world.objects.countries).features;
                 topo = countries;
                 draw(topo);
@@ -79,7 +78,6 @@
                     })
                     .attr("class", "equator")
                     .attr("d", path);
-
 
                 var country = g.selectAll(".country").data(topo);
                 // loop through the ountries update the path elements
@@ -114,16 +112,6 @@
                     .on("mouseout", function(d, i) {
                         tooltip.classed("hidden", true);
                     });
-
-
-                //EXAMPLE: adding some capitals from external CSV file
-                d3.csv("scripts/country-capitals.csv", function(err, capitals) {
-
-                    capitals.forEach(function(i) {
-                        addpoint(i.CapitalLongitude, i.CapitalLatitude, i.CapitalName);
-                    });
-
-                });
 
             }
 
@@ -160,8 +148,6 @@
 
             }
 
-
-
             var throttleTimer;
 
             function throttle() {   
@@ -172,36 +158,9 @@
                 }, 200);
             }
 
-
             //geo translation on mouse click in map
             function click() {
                 var latlon = projection.invert(d3.mouse(this));
-            }
-
-
-            //function to add points and text to the map (used in plotting capitals)
-            function addpoint(lat, lon, text) {
-
-                var gpoint = g.append("g").attr("class", "gpoint");
-                var x = projection([lat, lon])[0];
-                var y = projection([lat, lon])[1];
-
-                gpoint.append("svg:circle")
-                    .attr("cx", x)
-                    .attr("cy", y)
-                    .attr("class", "point")
-                    .attr("r", 1.5);
-
-                //conditional in case a point has no associated text
-                if (text.length > 0) {
-
-                    gpoint.append("text")
-                        .attr("x", x + 2)
-                        .attr("y", y + 2)
-                        .attr("class", "text")
-                        .text(text);
-                }
-
             }
 
         }

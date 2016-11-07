@@ -1,8 +1,8 @@
 <div id="navbar">
-    <button ng-click="vm.queryUsers()">Users</button>
-    <button ng-click="vm.querPurchases()">Purchases</button>
-    <button ng-click="vm.queryJournies()">Journies</button>
-    <button ng-click="vm.draw()">Map</button>
+    <a ng-click="vm.queryUsers()">Users</a>
+    <a ng-click="vm.querPurchases()">Purchases</a>
+    <a ng-click="vm.queryJournies()">Journies</a>
+    <a ng-click="vm.draw()">Map</a>
 </div>
 <div id="mainPage">
         <div id="container" ng-show="vm.mapContainer">
@@ -38,9 +38,6 @@
                 <th>Location</th>
                 <th>Depart</th>
                 <th>Return</th>
-                <th>Adult</th>
-                <th>Children</th>
-                <th>Infants</th>
                 <th>Class</th>
             </tr>
         </thead>
@@ -52,9 +49,6 @@
             <td>{{ticket.location}}</td>
             <td>{{ticket.depart}}</td>
             <td>{{ticket.return}}</td>
-            <td>{{ticket.adult}}</td>
-            <td><strong>{{ticket.children}}</strong></td>
-            <td>{{ticket.infants}}</td>
             <td>{{ticket.class}}</td>
         </tr>
 </table>
