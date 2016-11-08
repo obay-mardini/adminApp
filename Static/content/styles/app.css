@@ -27,7 +27,8 @@ body {
 
 #mainPage {
 /*  width: 50vw;*/
-  max-width: 750px;
+  max-width: 820px;
+/*  min-width: 750px;*/
   margin:10px auto;
   border-radius: 5px;
   height:100%;
@@ -66,11 +67,15 @@ div.tooltip {
 
 #legend {
     border: 2px solid black;
+    margin-top: 15px;
+    border-radius: 20px;
+    text-align: center;
+    background: #F0F8FF;
 }
 ul {
     list-style-type: none;
-    text-align: center;
-    background: #F0F8FF;
+    text-align: left;
+    display: inline-block;
 }
 
 ul div {

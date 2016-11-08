@@ -38,11 +38,11 @@
                         vm.usersByCountry[user.country] = vm.usersByCountry[user.country] || 0;
                         vm.usersByCountry[user.country]++;
                     });
-                    
+                    console.log(vm.usersByCountry)
                     for (var key in vm.usersByCountry) {
                         if (vm.usersByCountry[key] / result.length > 0.2) {
                             vm.mainTraffic.push(key)
-                        } else if (vm.usersByCountry[key] / result.length > 0.1) {
+                        } else if (vm.usersByCountry[key] / result.length > 0 ) {
                             vm.mediumTraffic.push(key)
                         } else {
                             vm.poorTraffic.push(key)
@@ -65,12 +65,13 @@
                     target[current.destinationcountry] = target[current.destinationcountry] || 0;
                     target[current.destinationcountry]++;
                     return target;
-                    }, {})
+                    }, {});
+                    
                     if (destionations[d.properties.name] / result.length > 0.3) {
                         return "blue";
                     } else if (destionations[d.properties.name] / result.length > 0.2) {
                         return 'red';
-                    } else if (destionations[d.properties.name] / result.length > 0.1) {
+                    } else if (destionations[d.properties.name] / result.length > 0) {
                         return 'green'
                     } else {;
                          return 'black';

@@ -1,7 +1,7 @@
 <div id="navbar">
     <a ng-click="vm.queryUsers()">Users</a>
     <a ng-click="vm.querPurchases()">Purchases</a>
-    <a ng-click="vm.queryJournies()">Journies</a>
+    <a ng-click="vm.queryJournies()">Journeys</a>
     <a ng-click="vm.draw()">Map</a>
 </div>
 <div id="mainPage">
@@ -11,7 +11,7 @@
                 <button id="destinationsButton" ng-click="vm.draw('destinations')">By Destinations</button>
             </div>
         </div>
-        <ul ng-show="vm.mapContainer" id="legend">
+        <div ng-show="vm.mapContainer" id="legend">
             <ul ng-hide="vm.map">
                 <li><div style="background: blue;"></div>Highest Traffic</li>
                 <li><div style="background: red;"></div>Medium Traffic</li>
@@ -19,13 +19,13 @@
                 <li><div style="background: black;"></div>No Traffic</li>
             </ul>
             <ul ng-show="vm.map">
-                <li><div style="background: blue;"></div>Highest Popularity</li>
-                <li><div style="background: red;"></div>Medium Popularity</li>
-                <li><div style="background: green;"></div>Poor Popularity</li>
+                <li><div style="background: blue;"></div>Highest Popularity > 30%</li>
+                <li><div style="background: red;"></div>Medium Popularity (20%-30%)</li>
+                <li><div style="background: green;"></div>Poor Popularity (0-20%)</li>
                 <li><div style="background: black;"></div>None</li>
             </ul>
            
-        </ul>
+        </div>
         
     
     <table ng-show="vm.ticketsRequest" class="table table-striped table-bordered">
