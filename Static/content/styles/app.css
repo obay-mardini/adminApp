@@ -97,6 +97,13 @@ ul div {
     text-decoration: underline;
     cursor: pointer
 }
+#navbar span {
+    color: #35f205;
+    float: left;
+    margin: 10px 15px;
+    display: inline-block;
+    
+}
 .hidden { 
   display: none; 
 }
