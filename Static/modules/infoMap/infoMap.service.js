@@ -91,7 +91,7 @@
                         return d.properties.name;
                     })
                     .style("fill", callback);
-                console.log()
+
                     //offsets for tooltips
                 var offsetL = document.getElementById('container').offsetLeft + 20;
                 var offsetT = document.getElementById('container').offsetTop + 10;
@@ -124,11 +124,10 @@
             }
 
             function move() {
-
+               
                 var t = d3.event.translate;
                 var s = d3.event.scale;
                 var h = height / 4;
-
 
                 t[0] = Math.min(
                     (width / height) * (s - 1),
@@ -153,7 +152,6 @@
             function throttle() {   
                 window.clearTimeout(throttleTimer);
                 throttleTimer = window.setTimeout(function() {
-                    console.log('trhott')
                     redraw();
                 }, 200);
             }

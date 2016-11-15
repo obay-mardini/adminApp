@@ -6,29 +6,37 @@
     <a ng-click="vm.draw()">Map</a>
 </div>
 <div id="mainPage">
-        <div id="container" ng-show="vm.mapContainer">
-            <div id="controllPanel">
-                <button id="usersButton" ng-click="vm.draw('users')">By Users</button>
-                <button id="destinationsButton" ng-click="vm.draw('destinations')">By Destinations</button>
-            </div>
+    <div id="container" ng-show="vm.mapContainer">
+        <div id="controllPanel">
+            <button id="usersButton" ng-click="vm.draw('users')">By Users</button>
+            <button id="destinationsButton" ng-click="vm.draw('destinations')">By Destinations</button>
         </div>
-        <div ng-show="vm.mapContainer" id="legend">
-            <ul ng-hide="vm.map">
-                <li><div style="background: blue;"></div>Highest Traffic</li>
-                <li><div style="background: red;"></div>Medium Traffic</li>
-                <li><div style="background: green;"></div>Poor Traffic</li>
-                <li><div style="background: black;"></div>No Traffic</li>
-            </ul>
-            <ul ng-show="vm.map">
-                <li><div style="background: blue;"></div>Highest Popularity > 30%</li>
-                <li><div style="background: red;"></div>Medium Popularity (20%-30%)</li>
-                <li><div style="background: green;"></div>Poor Popularity (0-20%)</li>
-                <li><div style="background: black;"></div>None</li>
-            </ul>
-           
-        </div>
-        
-    
+    </div>
+    <div ng-show="vm.mapContainer" id="legend">
+        <ul ng-hide="vm.map">
+            <li>
+                <div style="background: blue;"></div>Highest Traffic</li>
+            <li>
+                <div style="background: red;"></div>Medium Traffic</li>
+            <li>
+                <div style="background: green;"></div>Poor Traffic</li>
+            <li>
+                <div style="background: black;"></div>No Traffic</li>
+        </ul>
+        <ul ng-show="vm.map">
+            <li>
+                <div style="background: blue;"></div>Highest Popularity > 30%</li>
+            <li>
+                <div style="background: red;"></div>Medium Popularity (20%-30%)</li>
+            <li>
+                <div style="background: green;"></div>Poor Popularity (0-20%)</li>
+            <li>
+                <div style="background: black;"></div>None</li>
+        </ul>
+
+    </div>
+
+
     <table ng-show="vm.ticketsRequest" class="table table-striped table-bordered">
         <thead>
             <tr>
@@ -52,43 +60,42 @@
             <td>{{ticket.return}}</td>
             <td>{{ticket.class}}</td>
         </tr>
-</table>
+    </table>
 
     <table ng-show="vm.usersRequest" class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Country</th>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="user in vm.users">
+            <td><strong>{{user.id}}</strong></td>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.country}}</td>
         </tr>
-    </thead>
-    <tr ng-repeat="user in vm.users">
-        <td><strong>{{user.id}}</strong></td>
-        <td>{{user.name}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.country}}</td>
-    </tr>
-</table>
+    </table>
 
-<table ng-show="vm.purchaseRequest" class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>Purchase Id</th>
-            <th>Ticket Id</th>
-            <th>Price</th>
-            <th>Carrier</th>
-            <th>Agent</th>
+    <table ng-show="vm.purchaseRequest" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Purchase Id</th>
+                <th>Ticket Id</th>
+                <th>Price</th>
+                <th>Carrier</th>
+                <th>Agent</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="purchase in vm.purchases">
+            <td><strong>{{purchase.purchaseid}}</strong></td>
+            <td>{{purchase.ticketid}}</td>
+            <td>{{purchase.price}}</td>
+            <td>{{purchase.carrier}}</td>
+            <td>{{purchase.agent}}</td>
         </tr>
-    </thead>
-    <tr ng-repeat="purchase in vm.purchases">
-        <td><strong>{{purchase.purchaseid}}</strong></td>
-        <td>{{purchase.ticketid}}</td>
-        <td>{{purchase.price}}</td>
-        <td>{{purchase.carrier}}</td>
-        <td>{{purchase.agent}}</td>
-    </tr>
-</table>
+    </table>
 
-    </div>
-    
+</div>

@@ -1,11 +1,11 @@
 (function() {
     'use strict'
-    
+
     angular
         .module('app.landing')
         .controller('LandingController', LandingController);
-    
-    LandingController.$inject = [ 'infoMap', 'queryDb']
+
+    LandingController.$inject = ['infoMap', 'queryDb']
 
     function LandingController(infoMap, queryDb) {
         var vm = this;
@@ -23,16 +23,18 @@
         vm.purchaseRequest = false;
         vm.usersRequest = false;
         vm.mainTraffic = []
+
         function settingTheMap(mapType) {
             var numberOfUsers = 0;
             queryDb.queryUsers('/queryJournies').then(function(result) {
                 falsefy();
                 vm.mapContainer = true;
+
                 function usersBased(d, i) {
                     vm.mainTraffic = [];
                     vm.mediumTraffic = [];
                     vm.poorTraffic = [];
-                    
+
                     vm.usersByCountry = {};
                     result.forEach(function(user) {
                         vm.usersByCountry[user.country] = vm.usersByCountry[user.country] || 0;
@@ -42,13 +44,13 @@
                     for (var key in vm.usersByCountry) {
                         if (vm.usersByCountry[key] / result.length > 0.2) {
                             vm.mainTraffic.push(key)
-                        } else if (vm.usersByCountry[key] / result.length > 0 ) {
+                        } else if (vm.usersByCountry[key] / result.length > 0) {
                             vm.mediumTraffic.push(key)
                         } else {
                             vm.poorTraffic.push(key)
                         }
                     }
-            
+
                     if (vm.mainTraffic.indexOf(d.properties.name) > -1) {
                         return "blue";
                     } else if (vm.mediumTraffic.indexOf(d.properties.name) > -1) {
@@ -59,14 +61,14 @@
 
                     return 'black';
                 }
-                
+
                 function destinationBased(d, i) {
-                    var destionations = result.reduce(function(target, current){
-                    target[current.destinationcountry] = target[current.destinationcountry] || 0;
-                    target[current.destinationcountry]++;
-                    return target;
+                    var destionations = result.reduce(function(target, current) {
+                        target[current.destinationcountry] = target[current.destinationcountry] || 0;
+                        target[current.destinationcountry]++;
+                        return target;
                     }, {});
-                    
+
                     if (destionations[d.properties.name] / result.length > 0.3) {
                         return "blue";
                     } else if (destionations[d.properties.name] / result.length > 0.2) {
@@ -74,10 +76,10 @@
                     } else if (destionations[d.properties.name] / result.length > 0) {
                         return 'green'
                     } else {;
-                         return 'black';
+                        return 'black';
                     }
                 }
-                if(mapType !== 'users') {
+                if (mapType !== 'users') {
                     //to be replaced by a worker
                     vm.map = true;
                     setTimeout(function() {
@@ -89,16 +91,16 @@
                         infoMap.draw(usersBased);
                     }, 10);
                 }
-                
+
             }).catch(function(err) {
                 console.log(err)
             })
         }
-        
-        function queryUsers() {   
-           
+
+        function queryUsers() {
+
             queryDb.queryUsers('/queryUsers').then(function(result) {
-                 console.log('hello')
+                console.log('hello')
                 falsefy();
                 vm.usersRequest = true;
                 vm.users = result;
@@ -106,33 +108,33 @@
                 console.log(err)
             })
         }
-        
+
         function querPurchases() {
             queryDb.queryUsers('/queryPurchases').then(function(result) {
                 falsefy();
                 vm.purchaseRequest = true;
                 vm.purchases = result;
-            }).catch(function(err){
+            }).catch(function(err) {
                 console.log(err)
             })
         }
-        
+
         function queryJournies() {
             queryDb.queryUsers('/queryJournies').then(function(result) {
                 falsefy();
                 vm.ticketsRequest = true;
                 vm.tickets = result;
-            }).catch(function(err){
+            }).catch(function(err) {
                 console.log(err)
             })
         }
-        
+
         function falsefy() {
             vm.ticketsRequest = false;
             vm.mapContainer = false;
             vm.purchaseRequest = false;
             vm.usersRequest = false;
         }
-        
+
     }
 })();

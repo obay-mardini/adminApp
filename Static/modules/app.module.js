@@ -12,4 +12,14 @@
       'app.queryDb'
      
     ])
+    .config(configFunction);
+  
+    configFunction.$inject = ['$routeProvider'];
+    
+    function configFunction($routeProvider) {
+        $routeProvider.otherwise({
+            redirectTo: '/',
+        });
+    }
+    
 })();
