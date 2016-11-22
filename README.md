@@ -1,5 +1,7 @@
 #Mosafer admin
-
+    
+    I invite you to visit the application in http://mosaferadmin.herokuapp.com/#/
+    
     Mosafer has an admin application which provides tools that makes it easy
     to track and manage web traffic.
 
