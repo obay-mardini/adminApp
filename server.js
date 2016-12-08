@@ -2,7 +2,8 @@ var express = require('express');
 var app = express();
 var cookieSession = require('cookie-session');
 var bodyParser = require('body-parser');
-var queryDb = require('./queryDb')
+var queryDb = require('./queryDb');
+
 app.use(express.static(__dirname + '/Static'));
 
 app.use(bodyParser.urlencoded({

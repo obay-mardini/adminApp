@@ -41,7 +41,6 @@
         <thead>
             <tr>
                 <th>User Id</th>
-                <th>Ticket Id</th>
                 <th>Origin</th>
                 <th>Destination</th>
                 <th>Location</th>
@@ -52,7 +51,6 @@
         </thead>
         <tr ng-repeat="ticket in vm.tickets">
             <td><strong>{{ticket.userid}}</strong></td>
-            <td>{{ticket.ticketid}}</td>
             <td>{{ticket.origin}}</td>
             <td><strong>{{ticket.destination}}</strong></td>
             <td>{{ticket.location}}</td>
@@ -83,7 +81,6 @@
         <thead>
             <tr>
                 <th>Purchase Id</th>
-                <th>Ticket Id</th>
                 <th>Price</th>
                 <th>Carrier</th>
                 <th>Agent</th>
@@ -91,7 +88,6 @@
         </thead>
         <tr ng-repeat="purchase in vm.purchases">
             <td><strong>{{purchase.purchaseid}}</strong></td>
-            <td>{{purchase.ticketid}}</td>
             <td>{{purchase.price}}</td>
             <td>{{purchase.carrier}}</td>
             <td>{{purchase.agent}}</td>
