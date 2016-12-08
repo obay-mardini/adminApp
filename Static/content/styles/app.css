@@ -110,6 +110,7 @@ ul div {
 
 #controllPanel {
     width: 100%;
+    display: -webkit-inline-flex;
     display: inline-flex;
 }
 
